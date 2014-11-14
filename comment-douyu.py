@@ -162,20 +162,8 @@ def get_danmu(rid=b'5275', ip=b'danmu.douyutv.com', port=8001, username=b'visito
             pass
         else:
             print(msg)
+
 ###########from common.py
-# DEPRECATED in favor of match1()
-def r1(pattern, text):
-    m = re.search(pattern, text)
-    if m:
-        return m.group(1)
-
-# DEPRECATED in favor of match1()
-def r1_of(patterns, text):
-    for p in patterns:
-        x = r1(p, text)
-        if x:
-            return x
-
 def match1(text, *patterns):
     """Scans through a string for substrings matched some patterns (first-subgroups only).
 
@@ -268,8 +256,8 @@ def get_room_info(url):
     title_patt = r'<div class="headline clearfix">\s*<h1>([^<]{1,9999})</h1>'
     title_patt_backup = r'<title>([^<]{1,9999})</title>'
     
-    roomid = r1(room_id_patt,html)
-    title = r1_of([title_patt,title_patt_backup], html)
+    roomid = match1(html,room_id_patt)
+    title = match1(html,title_patt) or match1(html,title_patt_backup)
     title = unescape_html(title)
 
     conf = get_content("http://www.douyutv.com/api/client/room/"+roomid)
