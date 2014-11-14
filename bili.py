@@ -1,10 +1,11 @@
+#python3
 import socket
 import time
 import threading
 import json
 
 
-g_cid= 2558367
+g_cid= 2608687
 g_ip= 'livecmt.bilibili.com'
 g_port= 88
 g_exit= False
@@ -50,7 +51,8 @@ def recvmsg(s):
 
 def unpackage(data):
     try:
-        ret= json.loads(data.replace(b"\\\'",b"\'").decode('utf8'))
+        #ret= json.loads(data.replace(b"\\\'",b"\'").replace(b'\\t',b'\t').decode('utf8'))
+        ret= eval(data)
         return ret
     except:
         print('unable decode json.', data)

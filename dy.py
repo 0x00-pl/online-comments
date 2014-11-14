@@ -120,12 +120,12 @@ def get_longinres():
     threading.Thread(target=keepalive_recv).start()
 
 def get_danmu():
-    print('==========danmu')
     global g_rid
     global g_username
     global g_ip
     global g_port
     global g_gid
+    print('==========danmu',g_ip,g_port)
 
     s= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((g_ip,int(g_port)))
